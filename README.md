@@ -7,5 +7,11 @@ Possibility to post pictures, follow other users, like and comment in their pict
 
 Also included stories posting for your followers
 
+## Installation
+```bash
+Fork this project
+git clone https://github.com/YOUR-USERNAME/Instagram-Clone-iOS.git
+```
+
 ## Credits
 This project was from a course from iosacademy.teachable.com 
