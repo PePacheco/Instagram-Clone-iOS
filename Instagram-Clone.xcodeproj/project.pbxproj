@@ -28,6 +28,9 @@
 		6D1201E926101EAE009D70C6 /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1201E826101EAE009D70C6 /* AnalyticsManager.swift */; };
 		6D1201EC26101EBD009D70C6 /* HapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1201EB26101EBD009D70C6 /* HapticsManager.swift */; };
 		6D5179B02610278900346B32 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6D5179AF2610278900346B32 /* GoogleService-Info.plist */; };
+		6D6ABC6A261150EF00C766D7 /* SignInHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6ABC69261150EF00C766D7 /* SignInHeaderView.swift */; };
+		6D6ABC6D2611525700C766D7 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6ABC6C2611525700C766D7 /* Extensions.swift */; };
+		6D6ABC702611589100C766D7 /* IGTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6ABC6F2611589100C766D7 /* IGTextField.swift */; };
 		6DB2A8EA261012230001D936 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB2A8E9261012230001D936 /* AppDelegate.swift */; };
 		6DB2A8EC261012230001D936 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB2A8EB261012230001D936 /* SceneDelegate.swift */; };
 		6DB2A8EE261012230001D936 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB2A8ED261012230001D936 /* FeedViewController.swift */; };
@@ -59,6 +62,9 @@
 		6D1201E826101EAE009D70C6 /* AnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
 		6D1201EB26101EBD009D70C6 /* HapticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsManager.swift; sourceTree = "<group>"; };
 		6D5179AF2610278900346B32 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6D6ABC69261150EF00C766D7 /* SignInHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInHeaderView.swift; sourceTree = "<group>"; };
+		6D6ABC6C2611525700C766D7 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		6D6ABC6F2611589100C766D7 /* IGTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IGTextField.swift; sourceTree = "<group>"; };
 		6DB2A8E6261012230001D936 /* Instagram-Clone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Instagram-Clone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DB2A8E9261012230001D936 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6DB2A8EB261012230001D936 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -119,8 +125,8 @@
 		6D6F5E65261017E500819B3A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				6D1201BF26101D10009D70C6 /* Other */,
 				6D1201AE26101C19009D70C6 /* Core */,
+				6D1201BF26101D10009D70C6 /* Other */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -129,6 +135,8 @@
 			isa = PBXGroup;
 			children = (
 				6DB2A8F4261012230001D936 /* LaunchScreen.storyboard */,
+				6D6ABC69261150EF00C766D7 /* SignInHeaderView.swift */,
+				6D6ABC6F2611589100C766D7 /* IGTextField.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -170,6 +178,7 @@
 				6DB2A8F2261012230001D936 /* Assets.xcassets */,
 				6DB2A8E9261012230001D936 /* AppDelegate.swift */,
 				6DB2A8EB261012230001D936 /* SceneDelegate.swift */,
+				6D6ABC6C2611525700C766D7 /* Extensions.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -342,12 +351,15 @@
 				6D1201C526101D52009D70C6 /* SignUpViewController.swift in Sources */,
 				6D1201D426101E30009D70C6 /* User.swift in Sources */,
 				6D1201B726101C8D009D70C6 /* NotificationsViewController.swift in Sources */,
+				6D6ABC6A261150EF00C766D7 /* SignInHeaderView.swift in Sources */,
 				6D1201D126101DC7009D70C6 /* SettingsViewController.swift in Sources */,
+				6D6ABC702611589100C766D7 /* IGTextField.swift in Sources */,
 				6D1201E326101E97009D70C6 /* DatabaseManager.swift in Sources */,
 				6D1201DA26101E47009D70C6 /* Relationship.swift in Sources */,
 				6D1201D726101E3A009D70C6 /* Post.swift in Sources */,
 				6D1201E026101E82009D70C6 /* AuthManager.swift in Sources */,
 				6D1201C126101D3A009D70C6 /* SignInViewController.swift in Sources */,
+				6D6ABC6D2611525700C766D7 /* Extensions.swift in Sources */,
 				6D1201BA26101CA3009D70C6 /* ProfileViewController.swift in Sources */,
 				6D1201EC26101EBD009D70C6 /* HapticsManager.swift in Sources */,
 				6DB2A8EA261012230001D936 /* AppDelegate.swift in Sources */,
