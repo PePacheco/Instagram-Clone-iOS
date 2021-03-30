@@ -204,12 +204,12 @@
 		6DB2A8E8261012230001D936 /* Instagram-Clone */ = {
 			isa = PBXGroup;
 			children = (
-				6D6F5E6A2610181300819B3A /* Resources */,
-				6D6F5E692610180B00819B3A /* Managers */,
-				6D6F5E682610180300819B3A /* ViewModels */,
 				6D6F5E67261017FD00819B3A /* Models */,
-				6D6F5E66261017F500819B3A /* Views */,
 				6D6F5E65261017E500819B3A /* Controllers */,
+				6D6F5E66261017F500819B3A /* Views */,
+				6D6F5E682610180300819B3A /* ViewModels */,
+				6D6F5E692610180B00819B3A /* Managers */,
+				6D6F5E6A2610181300819B3A /* Resources */,
 				6DB2A8F7261012230001D936 /* Info.plist */,
 			);
 			path = "Instagram-Clone";
