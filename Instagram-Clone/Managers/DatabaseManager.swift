@@ -14,4 +14,15 @@ final class DatabaseManager {
     private init() {}
     
     let databaase = Firestore.firestore()
+    
+    public func createUser(newUser: User, completion: @escaping (Bool) -> Void) {
+        let reference = databaase.document("users/\(newUser.username)")
+        guard let dataUser = newUser.asDictionary() else {
+            completion(false)
+            return
+        }
+        reference.setData(dataUser) { error in
+            completion(error == nil)
+        }
+    }
 }
