@@ -10,7 +10,7 @@ import UIKit
 
 class SignInViewController: UIViewController, UITextFieldDelegate {
     
-    // MARK: Subviews
+    // MARK: - Subviews
     private let headerView = SignInHeaderView()
     
     private let emailField: IGTextField = {
@@ -62,7 +62,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         return button
     }()
     
-    // MARK: lifecycle
+    // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -140,7 +140,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         privacyButton.addTarget(self, action: #selector(didTapPrivacy), for: .touchUpInside)
     }
     
-    // MARK: Actions
+    // MARK: - Actions
     
     @objc func didTapSignIn() {
         emailField.resignFirstResponder()
@@ -183,7 +183,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         present(vc, animated: true)
     }
     
-    // MARK: Field Delegate
+    // MARK: - Field Delegate
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == emailField {

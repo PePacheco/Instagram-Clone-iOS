@@ -10,7 +10,7 @@ import SafariServices
 
 class SignUpViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    // MARK: Subviews
+    // MARK: - Subviews
     
     private let profilePictureImageView: UIImageView = {
         let imageView = UIImageView()
@@ -74,7 +74,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     
     public var completion: (()-> Void)?
     
-    // MARK: lifecycle
+    // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -159,7 +159,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         privacyButton.addTarget(self, action: #selector(didTapPrivacy), for: .touchUpInside)
     }
     
-    // MARK: Actions
+    // MARK: - Actions
     
     @objc func didTapImage() {
         let sheet = UIAlertController(title: "Profile Picture",
@@ -252,7 +252,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         present(vc, animated: true)
     }
     
-    // MARK: Field Delegate
+    // MARK: - Field Delegate
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == usernameField {
@@ -266,7 +266,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         return true
     }
     
-    // MARK: Image Picker Delegate
+    // MARK: - Image Picker Delegate
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
