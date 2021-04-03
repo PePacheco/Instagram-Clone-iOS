@@ -36,6 +36,10 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.frame = view.bounds
     }
     
+    @objc func didTapClose() {
+        dismiss(animated: true, completion: nil)
+    }
+    
     private func createTableFooter() {
         let footer = UIView(frame: CGRect(x: 0, y: 0, width: view.width, height: 50))
         footer.clipsToBounds = true
