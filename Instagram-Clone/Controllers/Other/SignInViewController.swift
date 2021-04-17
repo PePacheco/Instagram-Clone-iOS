@@ -11,6 +11,7 @@ import UIKit
 class SignInViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - Subviews
+    
     private let headerView = SignInHeaderView()
     
     private let emailField: IGTextField = {
