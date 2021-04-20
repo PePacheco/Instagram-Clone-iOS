@@ -8,6 +8,8 @@
 import UIKit
 
 class FeedViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    private var viewModels = [[FeedCellType]]()
 
     // MARK: - Subviews
     
@@ -20,6 +22,7 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         title = "Instagram"
         view.backgroundColor = .systemBackground
         self.configureCollectionView()
+        self.fetchPosts()
     }
     
     override func viewDidLayoutSubviews() {
@@ -27,6 +30,64 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         collectionView?.frame = view.bounds
     }
     
+    // MARK: - Functionalities
+    
+    private func fetchPosts() {
+        // mock data
+        let postData: [FeedCellType] = [
+            .poster(viewModel: PosterCollectionViewCellViewModel(username: "iosacademy", profilePictureURL: URL(string: "https://www.apple.com")!)),
+            .post(viewModel: PostCollectionViewCellViewModel(postURL: URL(string: "https://www.apple.com")!)),
+            .actions(viewModel: PostActionsCollectionViewCellViewModel(isLiked: true)),
+            .likeCount(viewModel: PostLikesCollectionViewCellViewModel(likers: ["kanyewest"])),
+            .caption(viewModel: PostCaptionCollectionViewCellViewModel(username: "iosacademy", caption: "This is an awesome first post")),
+            .timestamp(viewModel: PostDatetimeCollectionViewCellViewModel(date: Date()))
+        ]
+        viewModels.append(postData)
+        collectionView?.reloadData()
+    }
+    
+    // MARK: - CollectionView Delegate
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return viewModels.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return viewModels[section].count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cellType = viewModels[indexPath.section][indexPath.row]
+        
+        switch cellType {
+            
+        case .poster(let viewModel):
+            break
+        case .post(let viewModel):
+            break
+        case .actions(let viewModel):
+            break
+        case .likeCount(let viewModel):
+            break
+        case .caption(let viewModel):
+            break
+        case .timestamp(let viewModel):
+            break
+        }
+        
+        let colors: [UIColor] = [.red, .green, .blue, .yellow, .orange, .systemPink]
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+        
+        cell.contentView.backgroundColor = colors[indexPath.row]
+        
+        return cell
+    }
+    
+}
+
+extension FeedViewController {
     private func configureCollectionView() {
         let sectionHeight: CGFloat = 240 + view.width
         let collectionView = UICollectionView(
@@ -106,28 +167,4 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
         self.collectionView = collectionView
     }
-    
-    
-    // MARK: - CollectionView Delegate
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 3
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let colors: [UIColor] = [.red, .green, .blue, .yellow, .orange, .systemPink]
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-        
-        cell.contentView.backgroundColor = colors[indexPath.row]
-        
-        return cell
-    }
-    
 }
-
