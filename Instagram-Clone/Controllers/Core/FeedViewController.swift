@@ -58,8 +58,6 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let colors: [UIColor] = [.red, .green, .blue, .yellow, .orange, .systemPink]
-        
         let cellType = viewModels[indexPath.section][indexPath.row]
         
         switch cellType {
@@ -94,7 +92,6 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 fatalError()
             }
             cell.configure(with: viewModel)
-            cell.contentView.backgroundColor = colors[indexPath.row]
             return cell
             
         case .likeCount(let viewModel):
@@ -106,7 +103,6 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 fatalError()
             }
             cell.configure(with: viewModel)
-            cell.contentView.backgroundColor = colors[indexPath.row]
             return cell
             
         case .caption(let viewModel):
@@ -118,7 +114,6 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 fatalError()
             }
             cell.configure(with: viewModel)
-            cell.contentView.backgroundColor = colors[indexPath.row]
             return cell
             
         case .timestamp(let viewModel):
@@ -130,7 +125,6 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 fatalError()
             }
             cell.configure(with: viewModel)
-            cell.contentView.backgroundColor = colors[indexPath.row]
             return cell
             
         }
