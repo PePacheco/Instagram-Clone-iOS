@@ -69,6 +69,7 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
             ) as? PosterCollectionViewCell else {
                 fatalError()
             }
+            cell.delegate = self
             cell.configure(with: viewModel)
             return cell
             
@@ -80,6 +81,7 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
             ) as? PostCollectionViewCell else {
                 fatalError()
             }
+            cell.delegate = self
             cell.configure(with: viewModel)
             return cell
             
@@ -91,6 +93,7 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
             ) as? PostActionsCollectionViewCell else {
                 fatalError()
             }
+            cell.delegate = self
             cell.configure(with: viewModel)
             return cell
             
@@ -102,6 +105,7 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
             ) as? PostLikesCollectionViewCell else {
                 fatalError()
             }
+            cell.delegate = self
             cell.configure(with: viewModel)
             return cell
             
@@ -113,6 +117,7 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
             ) as? PostCaptionCollectionViewCell else {
                 fatalError()
             }
+            cell.delegate = self
             cell.configure(with: viewModel)
             return cell
             
@@ -132,6 +137,58 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
     }
     
+}
+
+extension FeedViewController: PosterCollectionViewCellDelegate {
+    func posterCollectionViewCellDidTapMore(_ cell: PosterCollectionViewCell) {
+        let sheet = UIAlertController(title: "Post Actions", message: nil, preferredStyle: .actionSheet)
+        sheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        sheet.addAction(UIAlertAction(title: "Share Post", style: .default, handler: nil))
+        sheet.addAction(UIAlertAction(title: "Report Post", style: .destructive, handler: nil))
+        present(sheet, animated: true)
+    }
+    
+    func posterCollectionViewCellDidTapUsername(_ cell: PosterCollectionViewCell) {
+        let vc = ProfileViewController(user: User(username: "kanye west", email: "kanye@gmail.com"))
+        navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+extension FeedViewController: PostCollectionViewCellDelegate {
+    func postCollectionViewCellDidLike(_ cell: PostCollectionViewCell) {
+        print("did tap to like")
+    }
+}
+
+extension FeedViewController: PostActionsCollectionViewCellDelegate {
+    func postActionsCollectionViewCellDidTapLike(_ cell: PostActionsCollectionViewCell, isLiked: Bool) {
+        // call DB to update like state
+    }
+    
+    func postActionsCollectionViewCellDidTapComment(_ cell: PostActionsCollectionViewCell) {
+        let vc = PostViewController()
+        vc.title = "Post"
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func postActionsCollectionViewCellDidTapShare(_ cell: PostActionsCollectionViewCell) {
+        let vc = UIActivityViewController(activityItems: ["Sharing from Instagram"], applicationActivities: [])
+        present(vc, animated: true)
+    }
+}
+
+extension FeedViewController: PostLikesCollectionViewCellDelegate {
+    func postLikesCollectionViewCellDidTapLikeCount(_ cell: PostLikesCollectionViewCell) {
+        let vc = ListViewController()
+        vc.title = "Liked By"
+        navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+extension FeedViewController: PostCaptionCollectionViewCellDelegate {
+    func postCaptionCollectionViewCellDidTapCaption(_ cell: PostCaptionCollectionViewCell) {
+        print("tapped on caption")
+    }
 }
 
 extension FeedViewController {
