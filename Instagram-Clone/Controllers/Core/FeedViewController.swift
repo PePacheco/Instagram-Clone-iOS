@@ -139,6 +139,8 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
 }
 
+//MARK: - PosterCell Delegate
+
 extension FeedViewController: PosterCollectionViewCellDelegate {
     func posterCollectionViewCellDidTapMore(_ cell: PosterCollectionViewCell) {
         let sheet = UIAlertController(title: "Post Actions", message: nil, preferredStyle: .actionSheet)
@@ -154,11 +156,15 @@ extension FeedViewController: PosterCollectionViewCellDelegate {
     }
 }
 
+//MARK: - PostCell Delegate
+
 extension FeedViewController: PostCollectionViewCellDelegate {
     func postCollectionViewCellDidLike(_ cell: PostCollectionViewCell) {
         print("did tap to like")
     }
 }
+
+//MARK: - PostActionsCell Delegate
 
 extension FeedViewController: PostActionsCollectionViewCellDelegate {
     func postActionsCollectionViewCellDidTapLike(_ cell: PostActionsCollectionViewCell, isLiked: Bool) {
@@ -177,6 +183,8 @@ extension FeedViewController: PostActionsCollectionViewCellDelegate {
     }
 }
 
+//MARK: - PostLikesCell Delegate
+
 extension FeedViewController: PostLikesCollectionViewCellDelegate {
     func postLikesCollectionViewCellDidTapLikeCount(_ cell: PostLikesCollectionViewCell) {
         let vc = ListViewController()
@@ -185,15 +193,19 @@ extension FeedViewController: PostLikesCollectionViewCellDelegate {
     }
 }
 
+//MARK: - PostCaptionCell Delegate
+
 extension FeedViewController: PostCaptionCollectionViewCellDelegate {
     func postCaptionCollectionViewCellDidTapCaption(_ cell: PostCaptionCollectionViewCell) {
         print("tapped on caption")
     }
 }
 
+//MARK: - Creating Collection View
+
 extension FeedViewController {
     private func configureCollectionView() {
-        let sectionHeight: CGFloat = 240 + view.width
+        let sectionHeight: CGFloat = 220 + view.width // was 240 + view.width
         let collectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: UICollectionViewCompositionalLayout(sectionProvider: { index, _ -> NSCollectionLayoutSection? in
@@ -230,7 +242,7 @@ extension FeedViewController {
             let captionItem = NSCollectionLayoutItem(
                 layoutSize: NSCollectionLayoutSize(
                     widthDimension: .fractionalWidth(1),
-                    heightDimension: .absolute(60)
+                    heightDimension: .absolute(40) // was 60
                 )
             )
             
