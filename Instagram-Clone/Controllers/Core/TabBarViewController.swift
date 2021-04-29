@@ -31,6 +31,12 @@ class TabBarViewController: UITabBarController {
         let nav4 = UINavigationController(rootViewController: notifications)
         let nav5 = UINavigationController(rootViewController: profile)
         
+        if #available(iOS 14.0, *) {
+            nav3.navigationItem.backButtonDisplayMode = .minimal
+        } else {
+            nav3.navigationItem.backButtonTitle = ""
+        }
+        
         nav1.navigationBar.tintColor = .label
         nav2.navigationBar.tintColor = .label
         nav3.navigationBar.tintColor = .label
