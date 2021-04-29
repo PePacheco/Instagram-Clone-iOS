@@ -11,7 +11,6 @@ Also included stories posting for your followers
 ```bash
 Fork this project
 $ git clone https://github.com/YOUR-USERNAME/Instagram-Clone-iOS.git
-// In the folder of the cloned code
 $ pod install
 ```
 
