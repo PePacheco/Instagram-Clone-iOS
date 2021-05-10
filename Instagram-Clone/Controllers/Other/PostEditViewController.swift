@@ -83,7 +83,8 @@ class PostEditViewController: UIViewController {
     //MARK: - Actions
     
     @objc func didTapNext() {
-        let vc = CaptionViewController(image: self.image)
+        guard let currentImage = imageView.image else { return }
+        let vc = CaptionViewController(image: currentImage)
         vc.title = "Add Caption"
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -118,6 +119,7 @@ class PostEditViewController: UIViewController {
 }
 
 //MARK: - CollectionView Delegates
+
 extension PostEditViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
