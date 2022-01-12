@@ -41,7 +41,7 @@ class CaptionViewController: UIViewController {
     }
     
     //MARK: - Lifecycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -77,9 +77,50 @@ class CaptionViewController: UIViewController {
         if caption == "Add caption..." {
             caption = ""
         }
-        // Upload photo, update database
+        
+        guard let newPostId = createNewPostID(), let dateString = String.date(from: Date()) else { return }
+        
+        StorageManager.shared.uploadPost(
+            data: image.pngData(),
+            id: newPostId
+        ) { success in
+            guard success else {
+                print("Error failed to upload")
+                return
+            }
+            
+            let newPost = Post(
+                id: newPostId,
+                caption: caption,
+                postedDate: dateString,
+                likers: []
+            )
+            
+            DatabaseManager.shared.createPost(newPost: newPost) { [weak self] finished in
+                guard let self = self, finished else {
+                    return
+                }
+                DispatchQueue.main.async {
+                    self.tabBarController?.tabBar.isHidden = false
+                    self.tabBarController?.selectedIndex = 0
+                    self.navigationController?.popToRootViewController(animated: true)
+                }
+            }
+            
+        }
     }
-
+    
+    private func createNewPostID() -> String? {
+        let date = Date()
+        let timeStamp = date.timeIntervalSince1970
+        let randomNumber = Int.random(in: 0...1000)
+        guard let username = UserDefaults.standard.string(forKey: "username") else {
+            return nil
+        }
+        
+        return "\(username)_\(randomNumber)_\(timeStamp)"
+    }
+    
 }
 
 //MARK: - TextView Delegates
