@@ -65,17 +65,8 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
     private func createViewModel(model: Post, username: String ,completion: @escaping (Bool) -> Void) {
         let group = DispatchGroup()
         group.enter()
-        group.enter()
         
-        var postURL: URL?
         var profilePictureURL: URL?
-        
-        StorageManager.shared.downloadURL(for: model) { url in
-            defer {
-                group.leave()
-            }
-            postURL = url
-        }
         
         StorageManager.shared.downloadProfileURL(for: username) { url in
             defer {
@@ -85,7 +76,7 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         }
         
         group.notify(queue: .main) { [weak self] in
-            guard let self = self, let postUrl = postURL, let profilePictureURL = profilePictureURL else {
+            guard let self = self, let postUrl = URL(string: model.postUrlString), let profilePictureURL = profilePictureURL else {
                 completion(false)
                 return
             }
