@@ -9,6 +9,8 @@ import UIKit
 
 class ExploreViewController: UIViewController {
     
+    private var posts = [Post]()
+    
     private let searchVC = UISearchController(searchResultsController: SearchResultsViewController())
     
     private let collectionView: UICollectionView = {
@@ -69,11 +71,21 @@ class ExploreViewController: UIViewController {
         view.addSubview(collectionView)
         collectionView.dataSource = self
         collectionView.delegate = self
+        self.fetchData()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         collectionView.frame = view.bounds
+    }
+    
+    private func fetchData() {
+        DatabaseManager.shared.explorePosts {[weak self] posts in
+            DispatchQueue.main.async {
+                self?.posts = posts
+                self?.collectionView.reloadData()
+            }
+        }
     }
 
 }
@@ -104,14 +116,22 @@ extension ExploreViewController: SearchResultsViewControllerDelegate {
 
 extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 30
+        return posts.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCell.identifier, for: indexPath) as? PhotoCollectionViewCell else {
             return UICollectionViewCell()
         }
-        cell.configure(with: UIImage(systemName: "heart"))
+        let model = posts[indexPath.row]
+        cell.configure(with: URL(string: model.postUrlString))
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        let post = posts[indexPath.row]
+        let vc = PostViewController(post: post)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

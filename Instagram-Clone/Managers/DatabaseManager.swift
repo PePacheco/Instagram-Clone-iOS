@@ -29,19 +29,19 @@ final class DatabaseManager {
     public func posts(
         for username: String,
         completion: @escaping (Result<[Post], Error>) -> Void) {
-            let ref = database.collection("users")
-                .document(username)
-                .collection("posts")
-            ref.getDocuments { snapshot, error in
-                guard let posts = snapshot?.documents.compactMap({
-                    Post(with: $0.data())
-                }),
-                error == nil else {
-                    return
-                }
-                
-                completion(.success(posts))
+        let ref = database.collection("users")
+            .document(username)
+            .collection("posts")
+        ref.getDocuments { snapshot, error in
+            guard let posts = snapshot?.documents.compactMap({
+                Post(with: $0.data())
+            }),
+            error == nil else {
+                return
             }
+            
+            completion(.success(posts))
+        }
     }
     
     public func findUser(with email: String, completion: @escaping (User?) -> Void) {
@@ -79,6 +79,40 @@ final class DatabaseManager {
         }
         reference.setData(dataUser) { error in
             completion(error == nil)
+        }
+    }
+    
+    public func explorePosts(completion: @escaping ([Post]) -> Void) {
+        let ref = database.collection("users")
+        ref.getDocuments { snapshot, error in
+            guard let users = snapshot?.documents.compactMap({ User(with: $0.data()) }), error == nil else {
+                completion([])
+                return
+            }
+            
+            let group = DispatchGroup()
+            var aggregatePosts = [Post]()
+            
+            users.forEach { user in
+                let postsRef = self.database.collection("users/\(user.username)/posts")
+                group.enter()
+                postsRef.getDocuments { snapshot, error in
+                    
+                    defer {
+                        group.leave()
+                    }
+                    
+                    guard let posts = snapshot?.documents.compactMap({ Post(with: $0.data()) }), error == nil else {
+                        completion([])
+                        return
+                    }
+                    aggregatePosts.append(contentsOf: posts)
+                }
+            }
+            
+            group.notify(queue: .main) {
+                completion(aggregatePosts)
+            }
         }
     }
 }
